@@ -1,9 +1,9 @@
 import tensorflow as tf
 import sys
 import matplotlib.pyplot as plt
-# import os
-# sys.path.append(r'./lib')
-from ModeCore import CenterLoss, create_model_1_AMsoftmax
+import os
+sys.path.append(r'./lib')
+from ModeCore import CenterLoss, create_model_1
 
 physical_devices = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(physical_devices[0], True)
@@ -48,7 +48,7 @@ val_dataset = tf.keras.utils.image_dataset_from_directory(
 )
 print(class_num)
 
-model = create_model_1_AMsoftmax(input_shape=DATA_SIZE, output_len=class_num)
+model = create_model_1(input_shape=DATA_SIZE, output_len=class_num)
 
 model.build(input_shape=[None]+DATA_SIZE)
 model.summary()
