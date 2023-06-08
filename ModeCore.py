@@ -68,15 +68,6 @@ def create_model_1(input_shape=(32, 32, 1), output_len=10):
     
     return model
 
-# 定义模型
-def create_model_1_AMsoftmax(input_shape=(32, 32, 1), output_len=10):
-    base_model = get_Sub_model(input_shape=input_shape, output_len=output_len)
-    amsoftmax_output = Amsoftmax(num_classes=output_len)(base_model.layers[-2].output)
-    model = tf.keras.models.Model(inputs=base_model.inputs, outputs=amsoftmax_output)
-    
-    return model
-    
-
 
 import tensorflow as tf
 
@@ -123,43 +114,6 @@ class CenterLoss(tf.keras.losses.Loss):
         centers_batch = centers_batch.stack()
         self.centers.assign(centers_batch)
 
-
-  
-
-import tensorflow as tf
-
-class Amsoftmax(tf.keras.layers.Layer):
-    def __init__(self, num_classes, scale=30, **kwargs):
-        super(Amsoftmax, self).__init__(**kwargs)
-        self.num_classes = num_classes
-        self.scale = scale
-        
-    def build(self, input_shape):
-        self.kernel = self.add_weight(name='kernel',
-                                      shape=(input_shape[-1], self.num_classes),
-                                      initializer='glorot_uniform',
-                                      trainable=True)
-        
-    def call(self, inputs, **kwargs):
-        # normalize the input vector
-        inputs = tf.math.l2_normalize(inputs, axis=1)
-        
-        # normalize the weights
-        kernel = tf.math.l2_normalize(self.kernel, axis=0)
-        
-        # calculate the logits
-        logits = tf.matmul(inputs, kernel)
-        
-        # add the scale factor to the logits
-        logits = self.scale * logits
-        
-        # apply the softmax function
-        probabilities = tf.nn.softmax(logits)
-        
-        return probabilities
-    
-    def compute_output_shape(self, input_shape):
-        return (input_shape[0], self.num_classes)
 
 
 
