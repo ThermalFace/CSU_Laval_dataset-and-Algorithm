@@ -15,9 +15,9 @@ This project contains an infrared face recognition model written on the Tensorfl
 * The main structure of the model is defined in ModeCore.py
 * The section on network learning training is defined in final_mode.py
 
-* The link to access the CSU_Laval dataset presented in this paper is: https://pan.baidu.com/s/1eFjIrEaHFCHXbVjDnyEINA and the password is: ykze
+* The link to access the CSU_Laval dataset is: https://pan.baidu.com/s/1eFjIrEaHFCHXbVjDnyEINA and the password is: ykze
 * The CSU_Laval dataset contains 344 individuals, with 210 at CSU and 134 at Laval University. For specific information on the dataset, please download the file and open the readme.
 
 # Usage
 Download the dataset CSU_Laval dataset and open the project file *final_mode.py* to train the network model.  
-Please see the paper for specific network parameter settings
+Please see the paper for specific network parameter settings.
